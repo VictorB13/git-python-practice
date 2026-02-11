@@ -1,0 +1,17 @@
+name: Python-Docker CI
+on: [push] #triggeted on push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check python syntax
+        run: python -m py_compile app.py #checking if the app.py has syntax errors
+
+      - name: Build Docker image
+        run: docker build -t python-docker-app . #building the docker image
+
+      - name: Run Docker container
+        run: docker run python-docker-app #running the docker container
